@@ -67,3 +67,55 @@ $card-size: calc(160px + 5vmin);
   display: block;
   margin-top: 1em;
 }
+
+.rowImage {
+  height: 46px;
+  width: 46px;
+  border-radius: 14px;
+  margin-right: 16px;
+}
+
+.cardRow {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f2f4f9;
+  padding-bottom: 8px;
+  padding-top: 14px;
+  padding-left: 30px;
+}
+
+.cardRow:hover {
+  background-color: white;
+  border-radius: 100px;
+  box-shadow: 0px 0px 5px black;
+}
+
+.cardTitle {
+  display: inline-block;
+  text-align: left;
+  width: 770px;
+}
+
+.cardLinkWrapper {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-color: #ffffff;
+  width: 129px;
+  height: 30px;
+  border-radius: 14.5px;
+}
+
+.cardLinkWrapper img {
+  margin-right: 10px;
+}
+
+.cardLink {
+  display: inline-block;
+  width: 97px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

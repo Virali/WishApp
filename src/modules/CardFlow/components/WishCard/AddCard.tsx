@@ -6,18 +6,16 @@ import Modal from "../../../_common/Modal";
 const ADD_TEXT = "ДОБАВИТЬ ЖЕЛАНИЕ";
 
 export const AddCard = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const handlerOpenModal = () => setIsOpen(!isOpen);
-
   return (
     <>
-      <div className="wishcard-container" onClick={handlerOpenModal}>
-        <div className="control-wrapper add-card">
-          <Plus />
-          <span>{ADD_TEXT}</span>
+      <Modal content={<ModalCreateWish />}>
+        <div className="wishcard-container">
+          <div className="control-wrapper add-card">
+            <Plus />
+            <span>{ADD_TEXT}</span>
+          </div>
         </div>
-      </div>
-      {isOpen && <Modal content={<ModalCreateWish />} toShow={true} />}
+      </Modal>
     </>
   );
 };
