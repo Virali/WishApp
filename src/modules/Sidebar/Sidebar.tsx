@@ -15,9 +15,15 @@ import { ReactComponent as SidebarToggle } from "../../assets/sidebarToggle.svg"
 import AddPlus from "./components/AddPlus";
 import Modal from "../_common/Modal";
 import { AuthContainer } from "../LoginPage/AuthContainer";
+import { selectIsAuth } from "../../utils/selectors";
 
-const Side = () => {
+const Sidebar = () => {
+  const isAuth = selectIsAuth();
   let history = useHistory();
+
+  if(!isAuth) {
+    return null;
+  }
 
   return (
     <div className="sidebar style-wrapper">
@@ -70,5 +76,4 @@ const Side = () => {
   );
 };
 
-const Sidebar = Side;
 export default Sidebar;

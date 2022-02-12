@@ -5,7 +5,13 @@ $indent: calc(8vh + 40px);
   left: 202px;
   top: $indent;
   background-color: #fafbfe;
-  width: 100%;
+  width: calc(100% - 202px - 14px - 66px);
   height: calc(100% - 8vh - 40px - 74px);
   padding: 60px 14px 14px 66px;
+}
+
+.guest {
+  left: 0;
+  width: calc(100% - 162px - 162px);
+  padding: 50px 162px 56px 162px;
 }
