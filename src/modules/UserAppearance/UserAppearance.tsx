@@ -4,7 +4,7 @@ import { ReactComponent as UncoverIcon } from "../../assets/uncoverIcon.svg";
 
 export const UserAppearance = function (props: {
   imgSource: string;
-  email: string;
+  email?: string;
 }) {
   const { imgSource, email } = props;
 

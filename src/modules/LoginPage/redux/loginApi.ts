@@ -16,7 +16,7 @@ export const logRequest = (body: any) => authFetch("POST", "/user/login", body);
 export const newPassRequest = (body: any) =>
   commonFetch("POST", "/user/password", body);
 
-export const updateRequest = () => commonFetch("POST", "/user/password/update");
+export const updatePassRequest = (body: any) => commonFetch("POST", "/user/password/update", body);
 
 export const authFetch = (
   method: string,

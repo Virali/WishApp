@@ -1,11 +1,6 @@
-import {
-  withRouter,
-  useHistory,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
+import React from "react";
+import { Nav } from "react-bootstrap";
+import { withRouter, useHistory } from "react-router-dom";
 
 import { SidebarHeader } from "../SidebarHeader/SidebarHeader";
 
@@ -15,47 +10,70 @@ import { ReactComponent as DeskLogo } from "../../assets/folder.svg";
 import { ReactComponent as EventLogo } from "../../assets/calendar.svg";
 import { ReactComponent as BlogLogo } from "../../assets/pen.svg";
 import { ReactComponent as BowLogo } from "../../assets/bow.svg";
-// import { ReactComponent as InviteText } from "../../assets/invite.svg";
+import { ReactComponent as InviteText } from "../../assets/inviteText.svg";
+import { ReactComponent as SidebarToggle } from "../../assets/sidebarToggle.svg";
+import AddPlus from "./components/AddPlus";
+import Modal from "../_common/Modal";
+import { AuthContainer } from "../LoginPage/AuthContainer";
+import { selectIsAuth } from "../../utils/selectors";
 
-const Side = () => {
-  // let history = useHistory();
+const Sidebar = () => {
+  const isAuth = selectIsAuth();
+  let history = useHistory();
+
+  if(!isAuth) {
+    return null;
+  }
 
   return (
     <div className="sidebar style-wrapper">
-      <SidebarHeader />
-      <ul>
-        <li>
-          <Link to="/wishes">
+      <Modal content={<AuthContainer />}>
+        <SidebarHeader />
+      </Modal>
+      <Nav
+        className="flex-column"
+        activeKey="/home"
+        onSelect={(selectedKey) => {
+          history.push(`${selectedKey}`);
+        }}
+      >
+        <Nav.Item>
+          <Nav.Link href="/home">
             <GiftLogo className="logo" />
             Желания
-          </Link>
-        </li>
-        <li>
-          <Link to="/dashboard">
-            <EventLogo className="logo" />
-            Доски
-          </Link>
-        </li>
-        <li>
-          <Link to="/about">
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/wishes">
             <DeskLogo className="logo" />
+            Доски
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/events">
+            <EventLogo className="logo" />
             События
-          </Link>
-        </li>
-        <li>
-          <Link to="/blog">
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="/blog">
             <BlogLogo className="logo" />
             Блог
-          </Link>
-        </li>
-      </ul>
-      <div className="invite-block">
-        <BowLogo className="bow-logo" />
-        {/* <InviteText /> */}
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <div className="plus-button">
+        <AddPlus />
+      </div>
+      <div className="footer-block">
+        <div className="invite-block">
+          <BowLogo className="bow-logo" />
+          <InviteText />
+        </div>
+        <SidebarToggle className="toggle" />
       </div>
     </div>
   );
 };
 
-const Sidebar = Side;
 export default Sidebar;

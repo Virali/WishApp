@@ -11,13 +11,15 @@ interface AuthState {
   login: LogResponse;
   error: string;
   isAuthorized: boolean;
+  isVisible: boolean;
 }
 
 const initialState: AuthState = {
   type: "LOGIN",
   login: {},
   error: "",
-  isAuthorized: false,
+  isAuthorized: Boolean(sessionStorage.getItem('userId')),
+  isVisible: false,
 };
 
 export const authSlice = createSlice({
@@ -26,6 +28,12 @@ export const authSlice = createSlice({
   reducers: {
     changeBoxType: (state, action: PayloadAction<AuthFormTypes>) => {
       state.type = action.payload;
+    },
+    toggleVisibility: (state, action: PayloadAction<boolean>) => {
+      state.isVisible = action.payload;
+    },
+    toggleAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuthorized = action.payload;
     },
     saveLoginResult: (state, action: PayloadAction<LogResponse>) => {
       state.login = action.payload;
@@ -41,6 +49,8 @@ export const authSlice = createSlice({
 
 export const {
   changeBoxType,
+  toggleVisibility,
+  toggleAuth,
   saveLoginResult,
   clearForm,
   saveError,

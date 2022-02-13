@@ -27,12 +27,12 @@ function closureAddRemoveModal(): [Element, Function] {
 
 type ModalProps = {
   toShow?: boolean;
-  handleBlur?: Function;
+  onBlur?: Function;
   children?: JSX.Element;
   content: JSX.Element;
 };
 // TODO: add default close button and ok button
-function Modal({ toShow, children, content }: ModalProps): JSX.Element | null {
+function Modal({ toShow, children, content, onBlur }: ModalProps): JSX.Element | null {
   const [elem, addRemoveModal] = useMemo(closureAddRemoveModal, []);
   const [isToShow, setIsToShow] = useState(!!toShow);
   const elemRef = useRef<Element>(elem);
@@ -53,6 +53,7 @@ function Modal({ toShow, children, content }: ModalProps): JSX.Element | null {
 
   function handleClose() {
     setIsToShow(false);
+    onBlur && onBlur();
   }
 
   return (
