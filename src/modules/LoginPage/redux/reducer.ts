@@ -32,6 +32,9 @@ export const authSlice = createSlice({
     toggleVisibility: (state, action: PayloadAction<boolean>) => {
       state.isVisible = action.payload;
     },
+    toggleAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuthorized = action.payload;
+    },
     saveLoginResult: (state, action: PayloadAction<LogResponse>) => {
       state.login = action.payload;
     },
@@ -47,6 +50,7 @@ export const authSlice = createSlice({
 export const {
   changeBoxType,
   toggleVisibility,
+  toggleAuth,
   saveLoginResult,
   clearForm,
   saveError,

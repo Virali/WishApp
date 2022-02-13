@@ -10,7 +10,7 @@ import {
   regRequest,
   updatePassRequest,
 } from "./loginApi";
-import { changeBoxType, saveError, saveLoginResult } from "./reducer";
+import { changeBoxType, saveError, saveLoginResult, toggleAuth } from "./reducer";
 
 export const logUser = (
   body: any
@@ -22,6 +22,7 @@ export const logUser = (
   }
 
   dispatch(saveLoginResult(res));
+  dispatch(toggleAuth(true));
 };
 
 export const regUser = (
@@ -34,6 +35,7 @@ export const regUser = (
   }
 
   dispatch(saveLoginResult(res));
+  dispatch(toggleAuth(true));
 };
 
 export const requestNewPass = (body: any) =>

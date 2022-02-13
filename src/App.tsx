@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Header } from "./modules/Header/Header";
 import { ActivityContainer } from "./modules/ActivityContainer/ActivityContainer";
 import { AuthComponent } from "./modules/LoginPage/AuthComponent";
-import { selectIsAuth } from "./utils/selectors";
 
 function App() {
   return (
