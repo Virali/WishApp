@@ -14,8 +14,8 @@ const SEARCH_PLACEHOLDER = "Search";
 export const Header = function () {
   const isAuth = selectIsAuth();
 
-  if(!isAuth) {
-    return <GuestHeader/>
+  if (!isAuth) {
+    return <GuestHeader />;
   }
 
   return (
@@ -24,7 +24,7 @@ export const Header = function () {
         <input className="search-input" placeholder={SEARCH_PLACEHOLDER} />
       </div>
       <div className="user-container">
-        <UserAppearance imgSource={exampleUserAvatar} />
+        <UserAppearance imgSource={exampleUserAvatar} email='antverpen'/>
         <div className="icon-row">
           <CircledQuestion />
           <DoorbellIcon />

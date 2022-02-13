@@ -5,6 +5,7 @@ $indent: calc(8vh + 40px);
   left: 202px;
   top: $indent;
   background-color: #fafbfe;
+  overflow-y: scroll;
   width: calc(100% - 202px - 14px - 66px);
   height: calc(100% - 8vh - 40px - 74px);
   padding: 60px 14px 14px 66px;

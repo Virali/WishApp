@@ -18,7 +18,7 @@ const initialState: AuthState = {
   type: "LOGIN",
   login: {},
   error: "",
-  isAuthorized: false,
+  isAuthorized: Boolean(sessionStorage.getItem('userId')),
   isVisible: false,
 };
 

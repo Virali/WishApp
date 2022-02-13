@@ -1,10 +1,5 @@
-import React from "react";
 import "./container.scss";
-import {
-  useRouteMatch,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { useRouteMatch, Route, Switch } from "react-router-dom";
 import { CardContainer } from "../CardFlow/CardContainer";
 import { selectIsAuth } from "../../utils/selectors";
 
