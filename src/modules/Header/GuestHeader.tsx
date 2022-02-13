@@ -2,9 +2,22 @@ import "./header.scss";
 import { EllipseButton } from "../_common/EllipseButton/EllipseButton";
 import { ReactComponent as LogoGreen } from "../../assets/igiftyouGreen.svg";
 import { ReactComponent as EntryText } from "../../assets/entryText.svg";
-import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import {
+  AuthFormTypes,
+  LOG_IN_TYPE,
+  SIGN_UP_TYPE,
+} from "../LoginPage/constants";
+import { changeBoxType, toggleVisibility } from "../LoginPage/redux/reducer";
 
 export const GuestHeader = () => {
+  const dispatch = useDispatch();
+
+  function openAuth(authType: AuthFormTypes) {
+    dispatch(changeBoxType(authType));
+    dispatch(toggleVisibility(true));
+  }
+
   return (
     <div className="header-wrapper-guest">
       <div className="left-side">
@@ -16,7 +29,7 @@ export const GuestHeader = () => {
           height="42px"
           textColor="#5C50E0"
           backgroundColor="#F7F7F7"
-          onClick={() => {}}
+          onClick={() => openAuth(SIGN_UP_TYPE)}
         >
           Регистрация
         </EllipseButton>
@@ -26,7 +39,7 @@ export const GuestHeader = () => {
           backgroundColor="#5C50E0"
           textColor="white"
           margin="0 0 0 20px"
-          onClick={() => {}}
+          onClick={() => openAuth(LOG_IN_TYPE)}
         >
           <EntryText />
         </EllipseButton>
@@ -34,7 +47,3 @@ export const GuestHeader = () => {
     </div>
   );
 };
-
-const ButtonML = styled(EllipseButton)`
-  margin-left: 20px;
-`;

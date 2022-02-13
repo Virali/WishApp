@@ -1,6 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-import { RootState, useAppSelector } from "../store";
+import { useAppSelector } from "../store";
 
 // root selectors
 export const useAuth = () => useAppSelector((state) => state.authentication);

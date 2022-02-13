@@ -5,8 +5,8 @@ import Sidebar from "./modules/Sidebar/Sidebar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Header } from "./modules/Header/Header";
 import { ActivityContainer } from "./modules/ActivityContainer/ActivityContainer";
-import { AuthContainer } from "./modules/LoginPage/AuthContainer";
-import Modal from "./modules/_common/Modal";
+import { AuthComponent } from "./modules/LoginPage/AuthComponent";
+import { selectIsAuth } from "./utils/selectors";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
             <Sidebar />
             <Header />
             <ActivityContainer />
-            <Modal content={<AuthContainer />} toShow={true} />
+            <AuthComponent />
           </Route>
         </Switch>
       </BrowserRouter>

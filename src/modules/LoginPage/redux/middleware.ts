@@ -1,14 +1,14 @@
-import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import { AnyAction } from "@reduxjs/toolkit";
 import { RootStateOrAny } from "react-redux";
 import { ThunkAction } from "redux-thunk";
 import { commonThunk } from "../../../utils/apiHelpers";
-import { AnyThunkDispatch } from "../../../utils/types";
-import { INST_SENT_TYPE, LOG_IN_TYPE } from "../constants";
+import { getURLParam } from "../../../utils/functions";
+import { INST_SENT_TYPE } from "../constants";
 import {
   logRequest,
   newPassRequest,
   regRequest,
-  updateRequest,
+  updatePassRequest,
 } from "./loginApi";
 import { changeBoxType, saveError, saveLoginResult } from "./reducer";
 
@@ -43,5 +43,9 @@ export const requestNewPass = (body: any) =>
     (res: any) => saveError(res.message)
   );
 
-export const updatePassword = () =>
-  commonThunk(updateRequest, (res: any) => saveError(res.message));
+export const updatePassword = (body: any) =>
+  commonThunk(
+    () => updatePassRequest(body),
+    () => logUser({ email: getURLParam("email"), password: body.password }),
+    (res: any) => saveError(res.message)
+  );

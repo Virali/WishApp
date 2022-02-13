@@ -22,6 +22,7 @@ import {
   requestNewPass,
   updatePassword,
 } from "./redux/middleware";
+import { checkEquality, getURLParam } from "../../utils/functions";
 
 const LOG_HEADER = "Организовывайте свои идеи подарков и мероприятий";
 const FORGET_HEADER = ["Забыли пароль?", "Такое случается с лучшими из нас"];
@@ -212,7 +213,16 @@ export const DataInputComponent = () => {
         break;
       }
       case NEW_PASS_TYPE: {
-        dispatch(updatePassword());
+        if (checkEquality(Object.values(formData))) {
+          dispatch(
+            updatePassword({
+              password: formData.password,
+              token: getURLParam("token"),
+            })
+          );
+        } else {
+          dispatch(saveError(ERROR_UNMATCH));
+        }
         break;
       }
     }

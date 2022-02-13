@@ -80,17 +80,15 @@ function switcher() {
 export const AuthContainer = () => {
   const { type: boxType } = useAuth();
   const isLogging = boxType === LOG_IN_TYPE || boxType === SIGN_UP_TYPE;
-  const { current: switchType } = useRef(switcher());
-  const dispatch = useDispatch();
 
   return (
     <div className="auth-box">
-      <span
+      {/* <span
         className="cross"
-        onClick={() => dispatch(changeBoxType(switchType()))}
+        onClick={() => dispatch(changeBoxType())}
       >
         ×
-      </span>
+      </span> */}
       <div className="auth-container">
         <div>
           <DataInputComponent />
