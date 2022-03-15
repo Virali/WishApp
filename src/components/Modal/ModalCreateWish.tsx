@@ -18,10 +18,11 @@ export const ButtonWrapper = styled(Button)`
   text-align: center;
 `;
 
-export const ModalCreateWish = () => {
-  const { values, handlers } = useHookModal();
+export const ModalCreateWish = (props: { id?: number | string }) => {
+  const { id } = props;
+  const { values, handlers } = useHookModal(id);
   const {
-    preview,
+    selectedFileBase64,
     selectedFile,
     visibleText,
     titleWish,
@@ -74,7 +75,7 @@ export const ModalCreateWish = () => {
           <div className="leftBlockContent">
             <ButtonAddPicture
               handlerSendPicture={handlerSendPicture}
-              preview={preview}
+              preview={selectedFileBase64}
               selectedFile={selectedFile}
             />
             <button className="greenButton">
@@ -86,7 +87,7 @@ export const ModalCreateWish = () => {
             <TextArea
               showText
               visibleText={visibleText}
-              titleWish={titleWish}
+              titleWish={titleWish?.title}
               handlerTitleWish={handlerTitleWish}
               handlerFocusTextArea={handlerFocusTextArea}
               handlerBlurTextArea={handlerBlurTextArea}
@@ -94,6 +95,7 @@ export const ModalCreateWish = () => {
             <TextArea
               placeholder="Введите детали, размер, цвет"
               handlerTitleWish={handlerTitleWish}
+              titleWish={titleWish?.describe}
             />
             <div className="wrapperPrice">
               <DropDown />

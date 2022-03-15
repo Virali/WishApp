@@ -12,6 +12,7 @@ export const ButtonAddPicture = ({
   preview,
   selectedFile,
 }: Props) => {
+  console.log(preview);
   return (
     <>
       <input
@@ -23,10 +24,10 @@ export const ButtonAddPicture = ({
         onChange={handlerSendPicture}
       />
       <label htmlFor="raised-button-file">
-        {selectedFile ? (
+        {selectedFile || preview ? (
           <>
             <div className="previewImage">
-              <img src={preview} />
+              <img src={`data:image/jpeg;base64,${preview}`} alt="preview" />
               <div className="previewimageEffect" />
               <div className="addImageText">
                 <img src={AddImage} alt="AddImage" />

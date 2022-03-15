@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ReactComponent as Plus } from "../../../../assets/blackPlus.svg";
 import { ModalCreateWish } from "../../../../components/Modal/ModalCreateWish";
 import Modal from "../../../_common/Modal";

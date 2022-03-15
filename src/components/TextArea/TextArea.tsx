@@ -27,6 +27,7 @@ export const TextArea = ({
       <textarea
         className="textArea"
         maxLength={100}
+        value={titleWish}
         onChange={(value) => handlerTitleWish(value, placeholder)}
         onFocus={handlerFocusTextArea}
         onBlur={handlerBlurTextArea}

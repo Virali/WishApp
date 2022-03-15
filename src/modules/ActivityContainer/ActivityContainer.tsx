@@ -6,10 +6,9 @@ import { selectIsAuth } from "../../utils/selectors";
 export const ActivityContainer = function () {
   const { path } = useRouteMatch();
   const isAuth = selectIsAuth();
-  console.log(path);
 
   return (
-    <div className={`activity-container ${!isAuth ? 'guest' : ''}`}>
+    <div className={`activity-container ${!isAuth ? "guest" : ""}`}>
       <Switch>
         <Route path={`${path}wishes`}>
           <>

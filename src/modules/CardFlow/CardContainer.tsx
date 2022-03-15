@@ -5,7 +5,7 @@ import SwitchButtonLeft from "../../assets/switchButtonLeft.svg";
 import SwitchButtonRight from "../../assets/switchButtonRight.svg";
 
 export const CardContainer = () => {
-  const [isTable, setIsTable] = useState(false);
+  const [isTable, setIsTable] = useState(true);
 
   const handlerSwitchTable = () => {
     setIsTable(!isTable);

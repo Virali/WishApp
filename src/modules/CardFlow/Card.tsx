@@ -15,7 +15,7 @@ const CardContainer = styled.div<{ isTable: boolean }>`
 
 export const Card = ({ isTable }) => {
   const dispatch = useDispatch();
-  const { wishes } = useWish();
+  const data = useWish();
 
   useEffect(() => {
     dispatch(getUniqueWishes());
@@ -25,9 +25,17 @@ export const Card = ({ isTable }) => {
     <>
       <CardContainer isTable={isTable}>
         <AddCard />
-        {wishes?.content?.map((element: any) => (
-          <WishCard costLevel={1} name={element.name} isTable={isTable} />
-        ))}
+        {data?.map((element: any) => {
+          return (
+            <WishCard
+              costLevel={1}
+              name={element.name}
+              imgSrc={element?.image?.content}
+              isTable={isTable}
+              id={element.id}
+            />
+          );
+        })}
         {/* <WishCard costLevel={1} name="default image" />
       <WishCard
         imgSrc={wishTest}

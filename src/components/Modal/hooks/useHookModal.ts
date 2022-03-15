@@ -1,12 +1,14 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { ApiNameFiled } from "../constants/constants";
-import { getUniqueWishes, postUniqueWishes } from "../redux/middleware";
-import { receivedDate } from "../redux/reducer";
-import { useWish } from "../redux/selectors";
+import { postUniqueWishes } from "../redux/middleware";
+import { useUniqueWish } from "../redux/selectors";
 
-export const useHookModal = () => {
+export const useHookModal = (id?: number | string) => {
   const [selectedFile, setSelectedFile] = useState();
+  const [selectedFileBase64, setSelectedFileBase64] = useState<
+    string | ArrayBuffer | null
+  >();
   const [preview, setPreview] = useState<string>();
   const [titleWish, setTitleWish] = useState<any>();
   const [inputValue, setInputValue] = useState<string>();
@@ -18,6 +20,15 @@ export const useHookModal = () => {
     [key: string]: boolean;
   }>();
   const dispatch = useDispatch();
+  const uniqueWish = useUniqueWish(id);
+  console.log(titleWish);
+  useEffect(() => {
+    setSelectedFileBase64(uniqueWish?.image?.content);
+    setCurrencyRadioValue(
+      uniqueWish?.price?.currencyCode === 0 ? "usd" : "rub"
+    );
+    setTitleWish({ title: uniqueWish?.name, describe: uniqueWish?.access });
+  }, [uniqueWish]);
 
   useEffect(() => {
     if (!selectedFile) {
@@ -31,12 +42,20 @@ export const useHookModal = () => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedFile]);
 
+  const encodeImageFileAsURL = (element) => {
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      setSelectedFileBase64(reader.result?.toString().split(",")[1]);
+    };
+    reader.readAsDataURL(element);
+  };
+
   const handlerSendPicture = (e: any) => {
     if (!e.target.files || e.target.files.length === 0) {
       setSelectedFile((prevValue) => prevValue);
       return;
     }
-
+    encodeImageFileAsURL(e.target.files[0]);
     setSelectedFile(e.target.files[0]);
   };
 
@@ -74,11 +93,12 @@ export const useHookModal = () => {
     setFormValues({
       ...checkBoxvalues,
       name: titleWish?.title,
-      lastModifiedDate: new Date().getTime(),
       details: titleWish?.describe,
-      image: {
-        content: selectedFile,
-      },
+      image: selectedFileBase64
+        ? {
+            content: selectedFileBase64,
+          }
+        : undefined,
       link: inputValue,
       price: {
         currencyCode: currencyRadioValue === "usd" ? 1 : 0,
@@ -88,7 +108,6 @@ export const useHookModal = () => {
 
   const handlerSubmitModal = (event: any) => {
     event.preventDefault();
-    console.log(formValues);
     dispatch(postUniqueWishes(formValues));
   };
 
@@ -101,6 +120,7 @@ export const useHookModal = () => {
       inputValue,
       currencyInputValue,
       currencyRadioValue,
+      selectedFileBase64,
     },
     handlers: {
       handlerSendPicture,
